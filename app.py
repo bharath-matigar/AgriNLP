@@ -28,9 +28,11 @@ if "analysis_result" not in st.session_state:
 # ---------------- CUSTOM STYLE ----------------
 st.markdown("""
 <style>
+
+/* Main background */
 .stApp {
-    background-color: #111612;
-    color: #E7EDE7;
+    background-color: #F5F4EF;
+    color: #293D49;
 }
 
 .block-container {
@@ -39,40 +41,45 @@ st.markdown("""
     padding-bottom: 3rem;
 }
 
+/* Sidebar */
 [data-testid="stSidebar"] {
-    background-color: #171E18;
-    border-right: 1px solid #303B31;
+    background-color: #EAEDE8;
+    border-right: 1px solid #DDE3DC;
 }
 
+/* Headings and text */
 h1, h2, h3, h4 {
-    color: #EDF2EB !important;
+    color: #263C49 !important;
 }
 
 p, label, .stMarkdown {
-    color: #B5C0B5;
+    color: #596B70;
 }
 
+/* Brand */
 .brand {
     font-size: 25px;
     font-weight: 750;
-    color: #E8EFE5;
+    color: #263C49;
     letter-spacing: -1px;
 }
 
 .brand span {
-    color: #A5C58A;
+    color: #6D9992;
 }
 
+/* Small heading accent */
 .eyebrow {
-    color: #A5C58A;
+    color: #72948C;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 2px;
 }
 
+/* Introduction */
 .intro {
     padding: 25px 0 28px 0;
-    border-bottom: 1px solid #303B31;
+    border-bottom: 1px solid #DDE4DE;
     margin-bottom: 30px;
 }
 
@@ -80,11 +87,13 @@ p, label, .stMarkdown {
     max-width: 750px;
     line-height: 1.8;
     font-size: 15px;
+    color: #596B70;
 }
 
+/* Result cards */
 .result-card {
-    background: #19221B;
-    border: 1px solid #354337;
+    background: #FFFFFF;
+    border: 1px solid #E1E7E2;
     border-radius: 10px;
     padding: 18px;
     min-height: 110px;
@@ -92,7 +101,7 @@ p, label, .stMarkdown {
 }
 
 .card-label {
-    color: #A5C58A;
+    color: #72948C;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 1.3px;
@@ -101,37 +110,40 @@ p, label, .stMarkdown {
 }
 
 .card-value {
-    color: #EDF2EB;
+    color: #293D49;
     font-size: 16px;
     line-height: 1.7;
     overflow-wrap: anywhere;
 }
 
+/* Entity tags */
 .entity-chip {
     display: inline-block;
-    background: #28372A;
-    color: #C6DAB8;
-    border: 1px solid #536C4D;
+    background: #EAF1ED;
+    color: #426B64;
+    border: 1px solid #D5E4DC;
     border-radius: 5px;
     padding: 5px 9px;
     margin: 3px;
     font-size: 13px;
 }
 
+/* Intent */
 .intent-card {
-    background: #202D22;
-    border-left: 3px solid #A5C58A;
+    background: #EAF1ED;
+    border-left: 3px solid #729A91;
     padding: 16px;
     border-radius: 5px;
-    color: #D5E5CB;
+    color: #2D514D;
     font-weight: 600;
 }
 
+/* Buttons */
 div.stButton > button,
 div.stFormSubmitButton > button {
-    background: #A5C58A;
-    color: #172018;
-    border: none;
+    background: #294A55;
+    color: #FFFFFF;
+    border: 1px solid #294A55;
     border-radius: 6px;
     font-weight: 700;
     min-height: 42px;
@@ -139,24 +151,35 @@ div.stFormSubmitButton > button {
 
 div.stButton > button:hover,
 div.stFormSubmitButton > button:hover {
-    background: #B8D3A2;
-    color: #172018;
+    background: #416A70;
+    color: #FFFFFF;
+    border-color: #416A70;
 }
 
+/* Input fields */
 .stTextArea textarea {
-    background: #19221B;
-    color: #EDF2EB;
-    border: 1px solid #465647;
+    background: #FFFFFF;
+    color: #293D49;
+    border: 1px solid #D8E1DC;
     border-radius: 7px;
 }
 
-hr {
-    border-color: #303B31;
+/* Select boxes */
+[data-baseweb="select"] > div {
+    background-color: #FFFFFF;
+    border-color: #D8E1DC;
 }
 
+/* Dividers */
+hr {
+    border-color: #DDE4DE;
+}
+
+/* Footer */
 footer {
     visibility: hidden;
 }
+
 </style>
 """, unsafe_allow_html=True)
 
