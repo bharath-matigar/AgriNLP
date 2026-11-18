@@ -38,7 +38,7 @@ if "analysis_result" not in st.session_state:
 
 
 # =====================================================
-# CUSTOM DESIGN
+# CUSTOM STYLE — NAVY AND TEAL
 # =====================================================
 
 st.markdown("""
@@ -47,8 +47,8 @@ st.markdown("""
 /* Main background */
 
 .stApp {
-    background-color: #F5F3EA;
-    color: #343B34;
+    background-color: #F2F5F8;
+    color: #344252;
 }
 
 .block-container {
@@ -60,12 +60,12 @@ st.markdown("""
 /* Sidebar */
 
 [data-testid="stSidebar"] {
-    background-color: #EAEDE3;
-    border-right: 1px solid #D8DED1;
+    background-color: #E7EDF2;
+    border-right: 1px solid #D5DEE7;
 }
 
 [data-testid="stSidebar"] p {
-    color: #4B554B;
+    color: #445466;
 }
 
 /* Brand */
@@ -73,16 +73,16 @@ st.markdown("""
 .brand {
     font-size: 27px;
     font-weight: 750;
-    color: #244B35;
+    color: #24364B;
     letter-spacing: -1px;
 }
 
 .brand span {
-    color: #78936A;
+    color: #4F8990;
 }
 
 .eyebrow {
-    color: #78936A;
+    color: #4F8990;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 2px;
@@ -91,18 +91,18 @@ st.markdown("""
 /* Headings */
 
 h1, h2, h3, h4 {
-    color: #244B35 !important;
+    color: #24364B !important;
 }
 
 p, label {
-    color: #4B554B;
+    color: #445466;
 }
 
 /* Introduction */
 
 .intro {
     padding: 25px 0 28px 0;
-    border-bottom: 1px solid #D8DED1;
+    border-bottom: 1px solid #D5DEE7;
     margin-bottom: 30px;
 }
 
@@ -110,14 +110,14 @@ p, label {
     max-width: 750px;
     line-height: 1.8;
     font-size: 15px;
-    color: #596358;
+    color: #526174;
 }
 
 /* Result cards */
 
 .result-card {
     background: #FFFFFF;
-    border: 1px solid #E0E5DA;
+    border: 1px solid #DCE4EB;
     border-radius: 10px;
     padding: 18px;
     min-height: 110px;
@@ -125,7 +125,7 @@ p, label {
 }
 
 .card-label {
-    color: #78936A;
+    color: #4F8990;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 1.3px;
@@ -134,7 +134,7 @@ p, label {
 }
 
 .card-value {
-    color: #343B34;
+    color: #24364B;
     font-size: 16px;
     line-height: 1.7;
     overflow-wrap: anywhere;
@@ -144,9 +144,9 @@ p, label {
 
 .entity-chip {
     display: inline-block;
-    background: #EDF2E9;
-    color: #31573A;
-    border: 1px solid #D5E1CE;
+    background: #E8F1F2;
+    color: #315F66;
+    border: 1px solid #C8DDDF;
     border-radius: 5px;
     padding: 5px 9px;
     margin: 3px;
@@ -156,11 +156,11 @@ p, label {
 /* Intent */
 
 .intent-card {
-    background: #EAF0E5;
-    border-left: 3px solid #78936A;
+    background: #E8F1F2;
+    border-left: 3px solid #4F8990;
     padding: 16px;
     border-radius: 5px;
-    color: #244B35;
+    color: #24364B;
     font-weight: 600;
 }
 
@@ -168,9 +168,9 @@ p, label {
 
 div.stButton > button,
 div.stFormSubmitButton > button {
-    background: #244B35;
+    background: #24364B;
     color: #FFFFFF;
-    border: 1px solid #244B35;
+    border: 1px solid #24364B;
     border-radius: 6px;
     font-weight: 600;
     min-height: 42px;
@@ -178,9 +178,9 @@ div.stFormSubmitButton > button {
 
 div.stButton > button:hover,
 div.stFormSubmitButton > button:hover {
-    background: #356447;
+    background: #34516C;
     color: #FFFFFF;
-    border-color: #356447;
+    border-color: #34516C;
 }
 
 /* Input fields */
@@ -188,41 +188,41 @@ div.stFormSubmitButton > button:hover {
 .stTextArea textarea,
 .stTextInput input {
     background: #FFFFFF;
-    color: #343B34;
-    border: 1px solid #CCD6C8;
+    color: #24364B;
+    border: 1px solid #CAD5DF;
     border-radius: 7px;
 }
 
 .stTextArea textarea:focus {
-    border-color: #78936A;
+    border-color: #4F8990;
 }
 
 /* Select boxes */
 
 [data-baseweb="select"] > div {
     background-color: #FFFFFF;
-    border-color: #CCD6C8;
+    border-color: #CAD5DF;
 }
 
 /* Expanders */
 
 [data-testid="stExpander"] {
     background-color: #FFFFFF;
-    border: 1px solid #E0E5DA;
+    border: 1px solid #DCE4EB;
     border-radius: 8px;
 }
 
 /* Dataframes */
 
 [data-testid="stDataFrame"] {
-    border: 1px solid #E0E5DA;
+    border: 1px solid #DCE4EB;
     border-radius: 8px;
 }
 
 /* Dividers */
 
 hr {
-    border-color: #D8DED1;
+    border-color: #D5DEE7;
 }
 
 /* Footer */
@@ -333,13 +333,11 @@ if page == "Home":
     left, right = st.columns(2)
 
     with left:
-
         st.markdown("**Supported Languages**")
         st.write("• Hindi-English")
         st.write("• Kannada-English")
 
     with right:
-
         st.markdown("**Core Components**")
         st.write("• Terminology normalization")
         st.write("• Agricultural entity extraction")
@@ -394,7 +392,6 @@ elif page == "Analyze Query":
     if submitted:
 
         if not query.strip():
-
             st.warning("Please enter a query.")
 
         else:
@@ -421,15 +418,10 @@ elif page == "Analyze Query":
 
             st.markdown(f"""
             <div class="result-card">
-
-                <div class="card-label">
-                    Original Query
-                </div>
-
+                <div class="card-label">Original Query</div>
                 <div class="card-value">
                     {html.escape(str(result.get("original_query", "")))}
                 </div>
-
             </div>
             """, unsafe_allow_html=True)
 
@@ -437,15 +429,10 @@ elif page == "Analyze Query":
 
             st.markdown(f"""
             <div class="result-card">
-
-                <div class="card-label">
-                    Normalized Query
-                </div>
-
+                <div class="card-label">Normalized Query</div>
                 <div class="card-value">
                     {html.escape(str(result.get("normalized_query", "")))}
                 </div>
-
             </div>
             """, unsafe_allow_html=True)
 
@@ -465,7 +452,6 @@ elif page == "Analyze Query":
 
                         st.markdown(f"""
                         <div class="result-card">
-
                             <div class="card-label">
                                 {html.escape(category.replace("_", " ").title())}
                             </div>
