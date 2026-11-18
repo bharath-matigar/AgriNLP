@@ -5,9 +5,12 @@ import html
 from pathlib import Path
 from nlp_engine import agricultural_nlp_pipeline
 
-# ---------------- PAGE CONFIG ----------------
+# =====================================================
+# PAGE CONFIGURATION
+# =====================================================
+
 st.set_page_config(
-    page_title="AgriNLP",
+    page_title="AgriNLP | Agricultural NLP Research",
     page_icon="🌱",
     layout="wide"
 )
@@ -15,22 +18,37 @@ st.set_page_config(
 BASE_DIR = Path(__file__).resolve().parent
 DATASET_PATH = BASE_DIR / "agricultural_queries_v1.csv"
 
-# ---------------- LOAD DATASET ----------------
+
+# =====================================================
+# LOAD DATASET
+# =====================================================
+
 try:
     dataset = pd.read_csv(DATASET_PATH)
 except Exception:
     dataset = pd.DataFrame()
 
-# ---------------- SESSION STATE ----------------
+
+# =====================================================
+# SESSION STATE
+# =====================================================
+
 if "analysis_result" not in st.session_state:
     st.session_state.analysis_result = None
 
-# ---------------- CUSTOM STYLE ----------------
+
+# =====================================================
+# CUSTOM DESIGN
+# =====================================================
+
 st.markdown("""
 <style>
+
+/* Main background */
+
 .stApp {
-    background-color: #111612;
-    color: #E7EDE7;
+    background-color: #F5F3EA;
+    color: #343B34;
 }
 
 .block-container {
@@ -39,40 +57,52 @@ st.markdown("""
     padding-bottom: 3rem;
 }
 
+/* Sidebar */
+
 [data-testid="stSidebar"] {
-    background-color: #171E18;
-    border-right: 1px solid #303B31;
+    background-color: #EAEDE3;
+    border-right: 1px solid #D8DED1;
 }
 
-h1, h2, h3, h4 {
-    color: #EDF2EB !important;
+[data-testid="stSidebar"] p {
+    color: #4B554B;
 }
 
-p, label, .stMarkdown {
-    color: #B5C0B5;
-}
+/* Brand */
 
 .brand {
-    font-size: 25px;
+    font-size: 27px;
     font-weight: 750;
-    color: #E8EFE5;
+    color: #244B35;
     letter-spacing: -1px;
 }
 
 .brand span {
-    color: #A5C58A;
+    color: #78936A;
 }
 
 .eyebrow {
-    color: #A5C58A;
+    color: #78936A;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 2px;
 }
 
+/* Headings */
+
+h1, h2, h3, h4 {
+    color: #244B35 !important;
+}
+
+p, label {
+    color: #4B554B;
+}
+
+/* Introduction */
+
 .intro {
     padding: 25px 0 28px 0;
-    border-bottom: 1px solid #303B31;
+    border-bottom: 1px solid #D8DED1;
     margin-bottom: 30px;
 }
 
@@ -80,11 +110,14 @@ p, label, .stMarkdown {
     max-width: 750px;
     line-height: 1.8;
     font-size: 15px;
+    color: #596358;
 }
 
+/* Result cards */
+
 .result-card {
-    background: #19221B;
-    border: 1px solid #354337;
+    background: #FFFFFF;
+    border: 1px solid #E0E5DA;
     border-radius: 10px;
     padding: 18px;
     min-height: 110px;
@@ -92,7 +125,7 @@ p, label, .stMarkdown {
 }
 
 .card-label {
-    color: #A5C58A;
+    color: #78936A;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 1.3px;
@@ -101,106 +134,171 @@ p, label, .stMarkdown {
 }
 
 .card-value {
-    color: #EDF2EB;
+    color: #343B34;
     font-size: 16px;
     line-height: 1.7;
     overflow-wrap: anywhere;
 }
 
+/* Entity tags */
+
 .entity-chip {
     display: inline-block;
-    background: #28372A;
-    color: #C6DAB8;
-    border: 1px solid #536C4D;
+    background: #EDF2E9;
+    color: #31573A;
+    border: 1px solid #D5E1CE;
     border-radius: 5px;
     padding: 5px 9px;
     margin: 3px;
     font-size: 13px;
 }
 
+/* Intent */
+
 .intent-card {
-    background: #202D22;
-    border-left: 3px solid #A5C58A;
+    background: #EAF0E5;
+    border-left: 3px solid #78936A;
     padding: 16px;
     border-radius: 5px;
-    color: #D5E5CB;
+    color: #244B35;
     font-weight: 600;
 }
 
+/* Buttons */
+
 div.stButton > button,
 div.stFormSubmitButton > button {
-    background: #A5C58A;
-    color: #172018;
-    border: none;
+    background: #244B35;
+    color: #FFFFFF;
+    border: 1px solid #244B35;
     border-radius: 6px;
-    font-weight: 700;
+    font-weight: 600;
     min-height: 42px;
 }
 
 div.stButton > button:hover,
 div.stFormSubmitButton > button:hover {
-    background: #B8D3A2;
-    color: #172018;
+    background: #356447;
+    color: #FFFFFF;
+    border-color: #356447;
 }
 
-.stTextArea textarea {
-    background: #19221B;
-    color: #EDF2EB;
-    border: 1px solid #465647;
+/* Input fields */
+
+.stTextArea textarea,
+.stTextInput input {
+    background: #FFFFFF;
+    color: #343B34;
+    border: 1px solid #CCD6C8;
     border-radius: 7px;
 }
 
-hr {
-    border-color: #303B31;
+.stTextArea textarea:focus {
+    border-color: #78936A;
 }
+
+/* Select boxes */
+
+[data-baseweb="select"] > div {
+    background-color: #FFFFFF;
+    border-color: #CCD6C8;
+}
+
+/* Expanders */
+
+[data-testid="stExpander"] {
+    background-color: #FFFFFF;
+    border: 1px solid #E0E5DA;
+    border-radius: 8px;
+}
+
+/* Dataframes */
+
+[data-testid="stDataFrame"] {
+    border: 1px solid #E0E5DA;
+    border-radius: 8px;
+}
+
+/* Dividers */
+
+hr {
+    border-color: #D8DED1;
+}
+
+/* Footer */
 
 footer {
     visibility: hidden;
 }
+
 </style>
 """, unsafe_allow_html=True)
 
 
-# ---------------- SIDEBAR ----------------
+# =====================================================
+# SIDEBAR NAVIGATION
+# =====================================================
+
 with st.sidebar:
+
     st.markdown(
         '<div class="brand">Agri<span>NLP</span></div>',
         unsafe_allow_html=True
     )
 
     st.caption("AGRICULTURAL QUERY RESEARCH")
+
     st.divider()
 
     page = st.radio(
         "NAVIGATION",
-        ["Home", "Analyze Query", "Dataset", "About Research"]
+        [
+            "Home",
+            "Analyze Query",
+            "Dataset",
+            "About Research"
+        ]
     )
 
     st.divider()
+
     st.caption("LANGUAGE SUPPORT")
     st.caption("Hindi-English")
     st.caption("Kannada-English")
 
 
-# ---------------- HEADER ----------------
+# =====================================================
+# HEADER
+# =====================================================
+
 st.markdown("""
 <div class="intro">
-    <div class="eyebrow">DOMAIN-SPECIFIC NLP RESEARCH</div>
+
+    <div class="eyebrow">
+        DOMAIN-SPECIFIC NLP RESEARCH
+    </div>
+
     <h1>AgriNLP</h1>
+
     <p>
         Domain-Specific Terminology Normalization for
         Code-Mixed Agricultural Queries.
     </p>
+
     <p>
-        A research prototype for understanding informal agricultural
-        language through terminology normalization, entity extraction
-        and intent classification.
+        A research prototype for understanding informal
+        agricultural language through terminology normalization,
+        entity extraction and intent classification.
     </p>
+
 </div>
 """, unsafe_allow_html=True)
 
 
-# ---------------- HOME ----------------
+# =====================================================
+# HOME
+# =====================================================
+
 if page == "Home":
 
     st.markdown("## Project Overview")
@@ -222,6 +320,7 @@ if page == "Home":
     ]
 
     for column, (number, title, description) in zip(columns, workflow):
+
         with column:
             st.markdown(f"**{number}**")
             st.markdown(f"#### {title}")
@@ -234,20 +333,27 @@ if page == "Home":
     left, right = st.columns(2)
 
     with left:
-        st.markdown("**Supported languages**")
+
+        st.markdown("**Supported Languages**")
         st.write("• Hindi-English")
         st.write("• Kannada-English")
 
     with right:
-        st.markdown("**Core components**")
+
+        st.markdown("**Core Components**")
         st.write("• Terminology normalization")
         st.write("• Agricultural entity extraction")
         st.write("• Intent classification")
 
-    st.info("Select Analyze Query from the sidebar to try the system.")
+    st.info(
+        "Select Analyze Query from the sidebar to try the system."
+    )
 
 
-# ---------------- ANALYZE QUERY ----------------
+# =====================================================
+# ANALYZE QUERY
+# =====================================================
+
 elif page == "Analyze Query":
 
     st.markdown("## Agricultural Query Analysis")
@@ -267,10 +373,14 @@ elif page == "Analyze Query":
     ]
 
     with st.form("query_form"):
-        sample = st.selectbox("Sample queries", examples)
+
+        sample = st.selectbox(
+            "Sample Queries",
+            examples
+        )
 
         query = st.text_area(
-            "Enter your query",
+            "Enter Your Query",
             value="" if sample == examples[0] else sample,
             placeholder="Type your agricultural query here...",
             height=120
@@ -282,41 +392,60 @@ elif page == "Analyze Query":
         )
 
     if submitted:
+
         if not query.strip():
+
             st.warning("Please enter a query.")
+
         else:
+
             try:
                 st.session_state.analysis_result = (
                     agricultural_nlp_pipeline(query.strip())
                 )
+
             except Exception as error:
                 st.error(f"Analysis failed: {error}")
 
     result = st.session_state.analysis_result
 
     if result:
+
         st.divider()
+
         st.markdown("### Analysis Results")
 
         left, right = st.columns(2)
 
         with left:
+
             st.markdown(f"""
             <div class="result-card">
-                <div class="card-label">Original Query</div>
+
+                <div class="card-label">
+                    Original Query
+                </div>
+
                 <div class="card-value">
                     {html.escape(str(result.get("original_query", "")))}
                 </div>
+
             </div>
             """, unsafe_allow_html=True)
 
         with right:
+
             st.markdown(f"""
             <div class="result-card">
-                <div class="card-label">Normalized Query</div>
+
+                <div class="card-label">
+                    Normalized Query
+                </div>
+
                 <div class="card-value">
                     {html.escape(str(result.get("normalized_query", "")))}
                 </div>
+
             </div>
             """, unsafe_allow_html=True)
 
@@ -325,32 +454,52 @@ elif page == "Analyze Query":
         entities = result.get("entities", {})
 
         if isinstance(entities, dict):
-            columns = st.columns(3)
 
-            for index, (category, values) in enumerate(entities.items()):
-                with columns[index % 3]:
-                    st.markdown(f"""
-                    <div class="result-card">
-                        <div class="card-label">
-                            {html.escape(category.replace("_", " ").title())}
-                        </div>
-                    """, unsafe_allow_html=True)
+            if entities:
 
-                    if values:
-                        chips = "".join(
-                            f'<span class="entity-chip">{html.escape(str(value))}</span>'
-                            for value in values
-                        )
-                        st.markdown(chips, unsafe_allow_html=True)
-                    else:
-                        st.caption("No entity detected")
+                columns = st.columns(3)
 
-                    st.markdown("</div>", unsafe_allow_html=True)
+                for index, (category, values) in enumerate(entities.items()):
+
+                    with columns[index % 3]:
+
+                        st.markdown(f"""
+                        <div class="result-card">
+
+                            <div class="card-label">
+                                {html.escape(category.replace("_", " ").title())}
+                            </div>
+                        """, unsafe_allow_html=True)
+
+                        if values:
+
+                            if not isinstance(values, (list, tuple, set)):
+                                values = [values]
+
+                            chips = "".join(
+                                f'<span class="entity-chip">{html.escape(str(value))}</span>'
+                                for value in values
+                            )
+
+                            st.markdown(
+                                chips,
+                                unsafe_allow_html=True
+                            )
+
+                        else:
+                            st.caption("No entity detected")
+
+                        st.markdown("</div>", unsafe_allow_html=True)
+
+            else:
+                st.caption("No entities detected.")
 
         else:
             st.write(entities)
 
-        intent = str(result.get("intent", "Not identified"))
+        intent = str(
+            result.get("intent", "Not identified")
+        )
 
         st.markdown("### Detected Intent")
 
@@ -361,25 +510,46 @@ elif page == "Analyze Query":
         """, unsafe_allow_html=True)
 
         st.caption(
-            "Note: This prototype performs terminology normalization, "
+            "This prototype performs terminology normalization, "
             "not complete sentence translation."
         )
 
 
-# ---------------- DATASET ----------------
+# =====================================================
+# DATASET
+# =====================================================
+
 elif page == "Dataset":
 
     st.markdown("## Research Dataset")
 
     if dataset.empty:
-        st.warning("Dataset file is missing or contains no records.")
+
+        st.warning(
+            "Dataset file is missing or contains no records."
+        )
+
     else:
-        st.metric("Total queries", len(dataset))
+
+        st.metric(
+            "Total Queries",
+            len(dataset)
+        )
 
         for column in dataset.columns:
-            if any(word in column.lower() for word in ["language", "intent"]):
-                st.markdown(f"### {column.replace('_', ' ').title()}")
-                st.bar_chart(dataset[column].value_counts())
+
+            if any(
+                word in column.lower()
+                for word in ["language", "intent"]
+            ):
+
+                st.markdown(
+                    f"### {column.replace('_', ' ').title()}"
+                )
+
+                st.bar_chart(
+                    dataset[column].value_counts()
+                )
 
         st.markdown("### Dataset Records")
 
@@ -395,7 +565,10 @@ elif page == "Dataset":
         )
 
 
-# ---------------- ABOUT RESEARCH ----------------
+# =====================================================
+# ABOUT RESEARCH
+# =====================================================
+
 elif page == "About Research":
 
     st.markdown("## About the Research")
@@ -412,23 +585,35 @@ elif page == "About Research":
     st.markdown("### Methodology")
 
     methodology = [
-        ("Dictionary-based normalization",
-         "Maps informal agricultural terminology to standard terms."),
-        ("Contextual phrase rules",
-         "Handles selected phrases using contextual patterns."),
-        ("Fuzzy matching",
-         "Handles approximate spelling variations."),
-        ("Entity extraction",
-         "Identifies crops, plant parts, diseases, pests and symptoms."),
-        ("Intent classification",
-         "Identifies the purpose of an agricultural query.")
+        (
+            "Dictionary-based normalization",
+            "Maps informal agricultural terminology to standard terms."
+        ),
+        (
+            "Contextual phrase rules",
+            "Handles selected phrases using contextual patterns."
+        ),
+        (
+            "Fuzzy matching",
+            "Handles approximate spelling variations."
+        ),
+        (
+            "Entity extraction",
+            "Identifies crops, plant parts, diseases, pests and symptoms."
+        ),
+        (
+            "Intent classification",
+            "Identifies the purpose of an agricultural query."
+        )
     ]
 
     for title, description in methodology:
+
         with st.expander(title):
             st.write(description)
 
     st.markdown("### Research Scope")
+
     st.write("• Hindi-English agricultural queries")
     st.write("• Kannada-English agricultural queries")
     st.write("• Terminology normalization")
@@ -445,7 +630,10 @@ elif page == "About Research":
     )
 
 
-# ---------------- FOOTER ----------------
+# =====================================================
+# FOOTER
+# =====================================================
+
 st.divider()
 
 st.caption(
